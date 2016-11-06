@@ -14,57 +14,41 @@
 # If you have enough courage and time, try storing (reading/writing) 
 # data in text files (YAML, JSON).
 # If you have even more courage, try implementing user interface.
-import numpy
+from Student import Student
+from Subject import Subject
+from school import School
 
-class Class(object):
-    def __init__(self, name):
-        self.name = name
-        self.grades = []
-        self.attendance = 0
-        
-    def addGrade(self, grade):
-        self.grades.append(grade)
-
-    def getAverage(self):
-        return numpy.mean(self.grades)
-        
-    def getAttendance(self):
-        return self.attendance
-        
-    def increaseAttendance(self):
-        self.attendance += 1
-        
-class StudentDiary(object):
-    def __init__(self, firstname, surname):
-        self.firstname = firstname
-        self.surname = surname
-        self.classes = []
-        
-    def getAverage(self):
-        grades = []
-        for c in self.classes:
-            grades.append(c.getAverage())
-        return numpy.mean(grades)
-        
-    def add_class(self, new_class):
-        self.classes.append(new_class)
-        
 if __name__ == "__main__":
-    pite = Class("pite")
-    pite.addGrade(5)
-    pite.addGrade(4)
-    pite.addGrade(5)
-    print "PITE avg: ", pite.getAverage()
-    zti = Class("zti")
-    zti.addGrade(5)
-    zti.addGrade(5)
-    zti.addGrade(5)
-    print "ZTI avg: ", zti.getAverage()
-    studentD1 = StudentDiary("Adam", "Abacki")
-    studentD1.add_class(pite)
-    studentD1.add_class(zti)
-    print "Average:", studentD1.getAverage()
-    pite.increaseAttendance()
-    pite.increaseAttendance()
-    zti.increaseAttendance()
-    print "PITE attendance: ", pite.getAttendance(), "\nZTI attendance: ", zti.getAttendance()
+    """Add students, subjects and grades"""
+    subject1 = Subject("pite")
+    subject1.add_grade(5)
+    subject1.add_grade(4)
+    subject1.add_grade(5)
+
+    subject2 = Subject("zti")
+    subject2.add_grade(5)
+    subject2.add_grade(5)
+    subject2.add_grade(5)
+
+    student_d1 = Student("Adam", "Abacki")
+    student_d1.add_subject(subject1)
+    student_d1.add_subject(subject2)
+
+    subject1.increase_attendance()
+    subject1.increase_attendance()
+    subject1.increase_attendance()
+    subject1.increase_attendance()
+    subject2.increase_attendance()
+    subject2.increase_attendance()
+    subject2.increase_attendance()
+
+    school1 = School()
+    school1.add_student(student_d1)
+
+    """Get/Print students, subjects and grades"""
+    adam = school1.get_student("Adam", "Abacki")
+    pite = adam.get_subject("pite")
+    zti = adam.get_subject("zti")
+    print "PITE\t attendance: ", pite.get_attendance(), " avg: ", pite.get_average()
+    print "ZTI\t\t attendance: ", zti.get_attendance(), " avg: ", zti.get_average()
+    print "Total average:", adam.get_average()
