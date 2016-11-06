@@ -16,7 +16,7 @@
 # If you have even more courage, try implementing user interface.
 from Student import Student
 from Subject import Subject
-from school import School
+from School import School
 
 if __name__ == "__main__":
     """Add students, subjects and grades"""
