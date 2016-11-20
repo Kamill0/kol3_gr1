@@ -1,6 +1,7 @@
 from numbers import Number
 
 import numpy
+"""d"""
 
 
 class Subject(object):

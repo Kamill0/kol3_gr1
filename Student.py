@@ -1,6 +1,31 @@
+from numbers import Number
+
 import numpy
 
-from Subject import Subject
+
+class Subject(object):
+    def __init__(self, name):
+        self.name = name
+        self.grades = []
+        self.attendance = 0
+
+    def add_grade(self, grade):
+        if not isinstance(grade, Number):
+            return
+        self.grades.append(grade)
+	return self
+
+    def get_average(self):
+        return numpy.mean(self.grades)
+
+    def get_attendance(self):
+        return self.attendance
+
+    def increase_attendance(self):
+        self.attendance += 1
+
+    def get_name(self):
+        return self.name
 
 
 class Student(object):
@@ -19,12 +44,10 @@ class Student(object):
         if not isinstance(new_subject, Subject):
             return
         self.subjects.append(new_subject)
+	return self
 
-    def get_first_name(self):
-        return self.first_name
-
-    def get_sur_name(self):
-        return self.sur_name
+    def get_full_name(self):
+        return self.first_name + self.sur_name
 
     def get_subject(self, name):
         for subject in self.subjects:
