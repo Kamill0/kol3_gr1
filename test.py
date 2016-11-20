@@ -32,57 +32,63 @@ class MyTest(unittest.TestCase):
 	#1 - adding string
 	def test_add_grade_string(self):
 		self.assertEqual(self.subject1.add_grade("test_string"), None)
-
-	#2 - adding list
-	def test_add_grade_list(self):
 		self.assertEqual(self.subject1.add_grade([1, 2, 3]), None)
-
-	#3 - adding tuple
-	def test_add_grade_tuple(self):
 		self.assertEqual(self.subject1.add_grade((1, 2, 3)), None)
 
-	#4 - testing mean
+	#2 - adding sequence
+	def test_add_grade_list(self):
+		self.assertEqual(self.subject1.add_grade([1, 2, 3]), None)
+		self.assertEqual(self.subject1.add_grade((1, 2, 3)), None)
+
+	#3 - testing mean
 	def test_get_average(self):
 		self.assertEqual(self.subject1.get_average(), 4.0)
+		self.subject1.add_grade(4.5)
+		self.assertEqual(self.subject1.get_average(), 4.125)
 
-	#5 - testing attendance
+	#4 - testing attendance
 	def test_get_attendance(self):
 	    	self.subject1.increase_attendance()
 	    	self.subject1.increase_attendance()
 	    	self.subject1.increase_attendance()
 		self.assertEqual(self.subject1.get_attendance(), 3)
 
-	#6 - adding tuple
+	#5 - adding tuple
 	def test_get_name(self):
 		self.assertEqual(self.subject1.get_name(), "pite")
 
-	#7 - getting student's average
+	#6 - getting student's average
 	def test_get_student_average(self):
 		self.assertEqual(self.student_d1.get_average(), 3.75)
 
-	#8 - adding subject to student
+	#7 - adding subject to student
 	def test_add_subject(self):
 		self.assertEqual(self.student_d1.add_subject("test_string"), None)
+		self.assertEqual(self.student_d1.add_subject((1, 2, 3)), None)
+		self.assertEqual(self.student_d1.add_subject([1, 2, 3]), None)		
 
-	#9 - gettin students name
+	#8 - gettin students name
 	def test_get_full_name(self):
 		self.assertEqual(self.student_d1.get_full_name(), "AdamAbacki")
+		self.assertEqual(self.student_d2.get_full_name(), "BartoszBabacki")
 
-	#10 - gettin existing subject from student
+	#9 - gettin existing subject from student
 	def test_get_subject(self):
 		self.assertEqual(self.student_d1.get_subject("pite"), self.subject1)
+		self.assertEqual(self.student_d1.get_subject("random_subject"), None)
 
-	#11 - gettin non-existing subject from student
+	#10 - gettin non-existing subject from student
 	def test_get_nota_subject(self):
 		self.assertEqual(self.student_d1.get_subject("random_subject"), None)
 
-	#12 - adding student to school
+	#11 - adding student to school
 	def test_add_student(self):
 		self.assertEqual(self.school1.add_student("random_student"), None)
+		self.assertEqual(self.school1.add_student((1, 2, 3)), None)
 
-	#13 - getting student from school
+	#12 - getting student from school
 	def test_get_student(self):
 		self.assertEqual(self.school1.get_student("Random", "Student"), None)	
-
+		self.assertEqual(type(self.school1.get_student("Adam", "Abacki")), type(self.student_d1))
 
 
